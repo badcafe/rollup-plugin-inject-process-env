@@ -1,0 +1,32 @@
+{
+  "extends": [],
+  "jsRules": {},
+  "rules": {
+      "interface-name": false,
+      "quotemark": [
+          true,
+          "single"
+      ],
+      "no-console": [
+          false
+      ],
+      "one-line": [
+          true,
+          "check-open-brace",
+          "check-whitespace"
+      ],
+      "object-literal-sort-keys": [
+          false
+      ],
+      "no-string-literal": false,
+      "triple-equals": [
+          false
+      ]
+  },
+  "rulesDirectory": [],
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**/*.ts"
+    ]
+  }
+}

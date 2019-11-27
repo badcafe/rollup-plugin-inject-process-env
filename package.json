@@ -1,0 +1,70 @@
+{
+  "name": "rollup-plugin-inject-process-env",
+  "version": "1.0.0",
+  "description": "Inject environment variables in process.env with Rollup",
+  "main": "dist/rollup-plugin-inject-process-env.cjs.js",
+  "module": "dist/rollup-plugin-inject-process-env.es.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "README.md"
+  ],
+  "scripts": {
+    "compile": "tsc",
+    "postcompile": "rollup -c",
+    "pretest": "cd test/myApp && tsc && rollup -c && cd ../..",
+    "test": "jest test --runInBand",
+    "site:prepare:sloc": "sloc --format json src/ > scripts/sloc-report.json",
+    "site:prepare:sloc:tests": "sloc --format json test/ > scripts/sloc-tests-report.json",
+    "site:prepare:tslint": "tslint --force -t json -o scripts/tslint-report.json -c tslint.json 'src/**/*.ts'",
+    "site:prepare:jest": "npm run pretest && jest test --runInBand --noStackTrace --silent --json --outputFile='scripts/jest-report.json'",
+    "presite": "npm run site:prepare:sloc && npm run site:prepare:sloc:tests && npm run site:prepare:tslint && npm run site:prepare:jest",
+    "site": "ts-node --project scripts/tsconfig.json scripts/site.ts",
+    "site:only": "ts-node --project scripts/tsconfig.json scripts/site.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/@badcafe/rollup-plugin-inject-process-env.git"
+  },
+  "author": "Philippe Poulard <philippe.poulard@inria.fr>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/@badcafe/rollup-plugin-inject-process-env/issues"
+  },
+  "homepage": "https://github.com/@badcafe/rollup-plugin-inject-process-env#readme",
+  "keywords": [
+    "rollup",
+    "plugin",
+    "rollup-plugin",
+    "process",
+    "env",
+    "process.env",
+    "environment variables",
+    "inject",
+    "browser"
+  ],
+  "devDependencies": {
+    "@rollup/plugin-inject": "^4.0.0",
+    "@types/jest": "^24.0.23",
+    "@types/jest-environment-puppeteer": "^4.3.1",
+    "@types/node": "^12.12.11",
+    "@types/puppeteer": "^2.0.0",
+    "chart.js": "^2.9.3",
+    "chartjs-node": "^1.7.1",
+    "jest": "^24.9.0",
+    "jest-puppeteer": "^4.3.0",
+    "puppeteer": "^2.0.0",
+    "rollup": "^1.27.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-typescript2": "^0.25.2",
+    "sloc": "^0.2.1",
+    "ts-jest": "^24.1.0",
+    "ts-node": "^8.5.2",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2"
+  },
+  "dependencies": {
+    "magic-string": "^0.25.4"
+  }
+}
