@@ -24,14 +24,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/@badcafe/rollup-plugin-inject-process-env.git"
+    "url": "git+https://github.com/badcafe/rollup-plugin-inject-process-env.git"
   },
   "author": "Philippe Poulard <philippe.poulard@inria.fr>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/@badcafe/rollup-plugin-inject-process-env/issues"
+    "url": "https://github.com/badcafe/rollup-plugin-inject-process-env/issues"
   },
-  "homepage": "https://github.com/@badcafe/rollup-plugin-inject-process-env#readme",
+  "homepage": "https://github.com/badcafe/rollup-plugin-inject-process-env#readme",
   "keywords": [
     "rollup",
     "plugin",
