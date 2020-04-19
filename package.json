@@ -12,7 +12,7 @@
   "scripts": {
     "compile": "tsc",
     "postcompile": "rollup -c",
-    "pretest": "cd test/myApp && tsc && rollup -c && cd ../..",
+    "pretest": "cd test/myApp && tsc && rollup -c && rollup -c rollup.config.2.js && cd ../..",
     "test": "jest test --runInBand",
     "site:prepare:sloc": "sloc --format json src/ > scripts/sloc-report.json",
     "site:prepare:sloc:tests": "sloc --format json test/ > scripts/sloc-tests-report.json",
@@ -44,27 +44,28 @@
     "browser"
   ],
   "devDependencies": {
-    "@rollup/plugin-inject": "^4.0.0",
-    "@types/jest": "^24.0.23",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@rollup/plugin-commonjs": "^11.1.0",
+    "@rollup/plugin-inject": "^4.0.1",
+    "@rollup/plugin-node-resolve": "^7.1.3",
+    "@types/jest": "^24.9.1",
     "@types/jest-environment-puppeteer": "^4.3.1",
-    "@types/node": "^12.12.11",
-    "@types/puppeteer": "^2.0.0",
-    "chart.js": "^2.9.3",
-    "chartjs-node": "^1.7.1",
+    "@types/node": "^12.12.35",
+    "@types/puppeteer": "^2.0.1",
     "jest": "^24.9.0",
-    "jest-puppeteer": "^4.3.0",
-    "puppeteer": "^2.0.0",
-    "rollup": "^1.27.3",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-typescript2": "^0.25.2",
+    "jest-puppeteer": "^4.4.0",
+    "puppeteer": "^2.1.1",
+    "rollup": "^1.32.1",
+    "rollup-plugin-typescript2": "^0.25.3",
     "sloc": "^0.2.1",
-    "ts-jest": "^24.1.0",
-    "ts-node": "^8.5.2",
+    "ts-jest": "^24.3.0",
+    "ts-node": "^8.8.2",
     "tslint": "^5.20.1",
-    "typescript": "^3.7.2"
+    "typescript": "^3.8.3"
   },
   "dependencies": {
-    "magic-string": "^0.25.4"
+    "magic-string": "^0.25.7",
+    "rollup-plugin-babel": "^4.4.0"
   }
 }

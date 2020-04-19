@@ -79,3 +79,10 @@ import injectProcessEnv from 'rollup-plugin-inject-process-env';
             UNUSED: null
          }),
 ```
+
+#### Icing on the cake
+
+You might notice that as mentionned in the documentation https://nodejs.org/api/process.html#process_process_env
+environment variables are always `string`, `number` or `boolean`.
+
+With **rollup-plugin-inject-process-env**, you may inject safely any JSON object to a `process.env` property.

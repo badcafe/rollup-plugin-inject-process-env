@@ -12,6 +12,7 @@ describe('Browser', () => {
         const page = await browser.newPage();
         page.on('console', async msg => console.log(await Promise.all(msg.args().map(jsh => jsh.jsonValue()))));
         const js = fs.readFileSync(`./test/myApp/dist/index.js`, 'utf8');
+//        await page.evaluate('const process={};' + js);
         await page.evaluate(js);
         frame = page.mainFrame();
         done();

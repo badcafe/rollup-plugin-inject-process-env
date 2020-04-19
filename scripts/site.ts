@@ -1,54 +1,12 @@
-/// <reference types="./@types/chartjs-node" />
 import * as fs from 'fs';
-import * as ChartjsNode from 'chartjs-node';
 
 const loc = JSON.parse(fs.readFileSync(`${__dirname}/sloc-report.json`, 'utf8')); // this file is generated (see package.json)
 const locTests = JSON.parse(fs.readFileSync(`${__dirname}/sloc-tests-report.json`, 'utf8')); // this file is generated (see package.json)
 const tsl = JSON.parse(fs.readFileSync(`${__dirname}/tslint-report.json`, 'utf8')); // this file is generated (see package.json)
 const jest = JSON.parse(fs.readFileSync(`${__dirname}/jest-report.json`, 'utf8')); // this file is generated (see package.json)
 
-(async function () {
-    const chartDataUri = await drawChart();
-    const readme = readmeText(chartDataUri);
-    fs.writeFileSync(`${__dirname}/../README.md`, readme);
-})();
-
-async function drawChart() {
-    const chartNode = new ChartjsNode(380, 380);
-    await chartNode.drawChart({
-        type: 'pie',
-        data: {
-            labels: ['Code', 'Comments', 'Empty', 'Tests'],
-            datasets: [{
-                label: 'Metrics',
-                data: [ loc.summary.source, 
-                    loc.summary.comment - loc.summary.mixed, 
-                    loc.summary.empty,
-                    locTests.summary.source
-                ],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 2
-            }]
-        },
-        options: {}
-    });
-    return chartNode.getImageDataUrl('image/png');
-}
+const readme = readmeText();
+fs.writeFileSync(`${__dirname}/../README.md`, readme);
 
 /**
  * Generate REPORTS.md
@@ -57,9 +15,8 @@ async function drawChart() {
  * * Linter from tslint
  * * Tests from jest
  */
-function readmeText(chartDataUri: string) {
+function readmeText() {
     const README = fs.readFileSync(`${__dirname}/../doc/README.md`, {encoding: 'utf8'});
-    const LOGO = fs.readFileSync(`${__dirname}/../doc/logo.svg`, {encoding: 'utf8'});
     return `<!--DO NOT EDIT : this file has been generated-->
 
 ${README}
@@ -69,10 +26,6 @@ ${README}
 > Code quality reports
 
 ### Metrics
-
-<div style="float:right; height:380px; width:380px">
-    <img src="${chartDataUri}"/>
-</div>
 
 | Files | ${loc.files.length} | |
 | ----- | -: | - |
@@ -124,10 +77,6 @@ ${suite.assertionResults.map((test: any) =>
 MIT
 
 ## Who ?
-
-<div style="float:right; width:150px">
-    ${LOGO}
-</div>
 
 * [Inria](http://inria.fr)
 * [Inria @ Github](https://github.com/inria)

@@ -12,6 +12,8 @@ export function getMissing() {
     return process.env.MISSING;
 }
 
-console.log(getNodeEnv())
-console.log(getSomeObject())
-console.log(getMissing())
+console.log('========= start MyApp');
+console.log(typeof getNodeEnv(), getNodeEnv())
+console.log(typeof getSomeObject(), getSomeObject())
+console.log(typeof getMissing(), getMissing())
+console.log('========= end MyApp');
