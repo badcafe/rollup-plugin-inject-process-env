@@ -73,10 +73,10 @@ import injectProcessEnv from 'rollup-plugin-inject-process-env';
             NODE_ENV: 'production',
             SOME_OBJECT: { one: 1, two: [1,2], three: '3' },
             UNUSED: null
-         }),
-		nodeResolve(),
-		commonjs()
-	],
+        }),
+        nodeResolve(),
+        commonjs()
+    ],
 ```
 
 #### Example with environment variables passed in the CLI :
@@ -162,7 +162,7 @@ With **rollup-plugin-inject-process-env**, you may inject safely any JSON object
 
 
 
-#### ✅ `/test/browser.test.ts` **2s** 
+#### ✅ `/test/browser.test.ts` **1.844s** 
 
 
 | Status | Suite | Test |
@@ -173,18 +173,7 @@ With **rollup-plugin-inject-process-env**, you may inject safely any JSON object
 
 
 
-#### ✅ `/test/node.2.test.ts` **0.219s** 
-
-
-| Status | Suite | Test |
-| ------ | ----- | ---- |
-| ✅ | Node | get NODE_ENV |
-| ✅ | Node | get SOME_OBJECT |
-| ✅ | Node | get MISSING |
-
-
-
-#### ✅ `/test/node.3.test.ts` **0.223s** 
+#### ✅ `/test/node.3.test.ts` **0.221s** 
 
 
 | Status | Suite | Test |
@@ -195,7 +184,18 @@ With **rollup-plugin-inject-process-env**, you may inject safely any JSON object
 
 
 
-#### ✅ `/test/node.test.ts` **0.197s** 
+#### ✅ `/test/node.2.test.ts` **0.2s** 
+
+
+| Status | Suite | Test |
+| ------ | ----- | ---- |
+| ✅ | Node | get NODE_ENV |
+| ✅ | Node | get SOME_OBJECT |
+| ✅ | Node | get MISSING |
+
+
+
+#### ✅ `/test/node.test.ts` **0.173s** 
 
 
 | Status | Suite | Test |

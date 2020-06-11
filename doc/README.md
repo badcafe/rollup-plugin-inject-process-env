@@ -71,10 +71,10 @@ import injectProcessEnv from 'rollup-plugin-inject-process-env';
             NODE_ENV: 'production',
             SOME_OBJECT: { one: 1, two: [1,2], three: '3' },
             UNUSED: null
-         }),
-		nodeResolve(),
-		commonjs()
-	],
+        }),
+        nodeResolve(),
+        commonjs()
+    ],
 ```
 
 #### Example with environment variables passed in the CLI :
