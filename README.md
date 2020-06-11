@@ -60,8 +60,6 @@ Pass any JSON object to the plugin that will be set as the `process.env` value. 
     )
 ```
 
-Note: if you use the [commonjs](https://github.com/rollup/plugins/tree/master/packages/commonjs) plugin `injectProcessEnv` must be listed _after_ it in your plugins list. Otherwise you will see the error `'import' and 'export' may only appear at the top level`.
-
 #### Example :
 
 ```js
@@ -164,7 +162,7 @@ With **rollup-plugin-inject-process-env**, you may inject safely any JSON object
 
 
 
-#### ✅ `/test/browser.test.ts` **1.964s** 
+#### ✅ `/test/browser.test.ts` **2s** 
 
 
 | Status | Suite | Test |
@@ -175,7 +173,7 @@ With **rollup-plugin-inject-process-env**, you may inject safely any JSON object
 
 
 
-#### ✅ `/test/node.2.test.ts` **0.251s** 
+#### ✅ `/test/node.2.test.ts` **0.219s** 
 
 
 | Status | Suite | Test |
@@ -186,18 +184,7 @@ With **rollup-plugin-inject-process-env**, you may inject safely any JSON object
 
 
 
-#### ✅ `/test/node.test.ts` **0.209s** 
-
-
-| Status | Suite | Test |
-| ------ | ----- | ---- |
-| ✅ | Node | get NODE_ENV |
-| ✅ | Node | get SOME_OBJECT |
-| ✅ | Node | get MISSING |
-
-
-
-#### ✅ `/test/node.3.test.ts` **0.21s** 
+#### ✅ `/test/node.3.test.ts` **0.223s** 
 
 
 | Status | Suite | Test |
@@ -205,6 +192,17 @@ With **rollup-plugin-inject-process-env**, you may inject safely any JSON object
 | ✅ | Filter out CSS | get NODE_ENV |
 | ✅ | Filter out CSS | get SOME_OBJECT |
 | ✅ | Filter out CSS | get MISSING |
+
+
+
+#### ✅ `/test/node.test.ts` **0.197s** 
+
+
+| Status | Suite | Test |
+| ------ | ----- | ---- |
+| ✅ | Node | get NODE_ENV |
+| ✅ | Node | get SOME_OBJECT |
+| ✅ | Node | get MISSING |
 
 
 

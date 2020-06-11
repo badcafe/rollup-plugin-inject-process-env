@@ -11,3 +11,5 @@ This is why we need to test within the browser.
 * Advanced tests are run in the browser
 
 There is a second Rollup config for testing with plugins that would already define `process.env` somehow.
+
+And a third one for testing file exclusion.
