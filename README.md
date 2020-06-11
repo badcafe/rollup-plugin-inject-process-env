@@ -60,6 +60,8 @@ Pass any JSON object to the plugin that will be set as the `process.env` value. 
     )
 ```
 
+> Note: if you use the [commonjs](https://github.com/rollup/plugins/tree/master/packages/commonjs) plugin `injectProcessEnv` must be listed _after_ it in your plugins list. Otherwise you will see the error `'import' and 'export' may only appear at the top level`.
+
 #### Example :
 
 ```js
@@ -162,7 +164,7 @@ With **rollup-plugin-inject-process-env**, you may inject safely any JSON object
 
 
 
-#### ✅ `/test/browser.test.ts` **1.844s** 
+#### ✅ `/test/browser.test.ts` **2.033s** 
 
 
 | Status | Suite | Test |
@@ -173,7 +175,7 @@ With **rollup-plugin-inject-process-env**, you may inject safely any JSON object
 
 
 
-#### ✅ `/test/node.3.test.ts` **0.221s** 
+#### ✅ `/test/node.3.test.ts` **0.208s** 
 
 
 | Status | Suite | Test |
@@ -184,7 +186,7 @@ With **rollup-plugin-inject-process-env**, you may inject safely any JSON object
 
 
 
-#### ✅ `/test/node.2.test.ts` **0.2s** 
+#### ✅ `/test/node.2.test.ts` **0.196s** 
 
 
 | Status | Suite | Test |
@@ -195,7 +197,7 @@ With **rollup-plugin-inject-process-env**, you may inject safely any JSON object
 
 
 
-#### ✅ `/test/node.test.ts` **0.173s** 
+#### ✅ `/test/node.test.ts` **0.208s** 
 
 
 | Status | Suite | Test |
