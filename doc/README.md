@@ -48,7 +48,14 @@ npm install --save-dev rollup-plugin-inject-process-env
 Pass any JSON object to the plugin that will be set as the `process.env` value. This object accept members value of any type.
 
 ```typescript
-    injectProcessEnv(env: {})
+    injectProcessEnv(
+        env: {},
+        options: {
+            include?: string | string[],
+            exclude?: string | string[],
+            verbose?: boolean
+        }
+    )
 ```
 
 #### Example :
@@ -78,6 +85,38 @@ import injectProcessEnv from 'rollup-plugin-inject-process-env';
             SOME_OBJECT: JSON.parse(process.env.SOME_OBJECT),
             UNUSED: null
          }),
+```
+
+#### Options
+
+* The `verbose` option allows to show which file is included in the process and which one is excluded.
+* The `include` and `exclude` options allow to explicitely specify with a [minimatch pattern](https://github.com/isaacs/minimatch) the files to accept or reject. By default, all files are targeted and no files are rejected.
+
+Example :
+
+```js
+        injectProcessEnv({
+            NODE_ENV: 'production',
+            SOME_OBJECT: { one: 1, two: [1,2], three: '3' },
+            UNUSED: null
+        }, {
+            exclude: '**/*.css',
+            verbose: true
+        }),
+        postcss({
+            inject: true,
+            minimize: true,
+            plugins: [],
+        }),
+```
+
+Output example of the `verbose` option :
+
+```
+[rollup-plugin-inject-process-env] Include /path/to/src/index.ts
+[rollup-plugin-inject-process-env] Exclude rollup-plugin-inject-process-env
+[rollup-plugin-inject-process-env] Exclude /path/to/src/style.3.css
+[rollup-plugin-inject-process-env] Include /path/to/node_modules/style-inject/dist/style-inject.es.js
 ```
 
 #### Icing on the cake

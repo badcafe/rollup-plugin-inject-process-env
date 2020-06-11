@@ -50,7 +50,14 @@ npm install --save-dev rollup-plugin-inject-process-env
 Pass any JSON object to the plugin that will be set as the `process.env` value. This object accept members value of any type.
 
 ```typescript
-    injectProcessEnv(env: {})
+    injectProcessEnv(
+        env: {},
+        options: {
+            include?: string | string[],
+            exclude?: string | string[],
+            verbose?: boolean
+        }
+    )
 ```
 
 #### Example :
@@ -82,6 +89,38 @@ import injectProcessEnv from 'rollup-plugin-inject-process-env';
          }),
 ```
 
+#### Options
+
+* The `verbose` option allows to show which file is included in the process and which one is excluded.
+* The `include` and `exclude` options allow to explicitely specify with a [minimatch pattern](https://github.com/isaacs/minimatch) the files to accept or reject. By default, all files are targeted and no files are rejected.
+
+Example :
+
+```js
+        injectProcessEnv({
+            NODE_ENV: 'production',
+            SOME_OBJECT: { one: 1, two: [1,2], three: '3' },
+            UNUSED: null
+        }, {
+            exclude: '**/*.css',
+            verbose: true
+        }),
+        postcss({
+            inject: true,
+            minimize: true,
+            plugins: [],
+        }),
+```
+
+Output example of the `verbose` option :
+
+```
+[rollup-plugin-inject-process-env] Include /path/to/src/index.ts
+[rollup-plugin-inject-process-env] Exclude rollup-plugin-inject-process-env
+[rollup-plugin-inject-process-env] Exclude /path/to/src/style.3.css
+[rollup-plugin-inject-process-env] Include /path/to/node_modules/style-inject/dist/style-inject.es.js
+```
+
 #### Icing on the cake
 
 You might notice that as mentionned in the documentation https://nodejs.org/api/process.html#process_process_env
@@ -97,12 +136,12 @@ With **rollup-plugin-inject-process-env**, you may inject safely any JSON object
 
 | Files | 1 | |
 | ----- | -: | - |
-| Lines of code | 41 | (w/o comments) |
+| Lines of code | 59 | (w/o comments) |
 | Comments | 4 | (+ 1 with code) |
-| Empty lines | 3 | |
-| **Total lines** | **48** | (w/o tests) |
+| Empty lines | 4 | |
+| **Total lines** | **67** | (w/o tests) |
 | TODO | 0 | lines |
-| Tests | 308 | (w/o comments) |
+| Tests | 455 | (w/o comments) |
 
 ### Linter
 
@@ -115,26 +154,15 @@ With **rollup-plugin-inject-process-env**, you may inject safely any JSON object
 |   | Tests suites | Tests |
 | - | ------------ | ----- |
 | ❌ Failed | 0 | 0 |
-| ✅ Passed | 3 | 9 |
+| ✅ Passed | 4 | 12 |
 | ✴ Pending | 0 | 0 |
 | ☢ Error | 0 | |
-| **Total** | **3** | **9** |
+| **Total** | **4** | **12** |
 
 
 
 
-#### ✅ `/test/node.2.test.ts` **1.122s** 
-
-
-| Status | Suite | Test |
-| ------ | ----- | ---- |
-| ✅ | Node | get NODE_ENV |
-| ✅ | Node | get SOME_OBJECT |
-| ✅ | Node | get MISSING |
-
-
-
-#### ✅ `/test/browser.test.ts` **0.802s** 
+#### ✅ `/test/browser.test.ts` **1.964s** 
 
 
 | Status | Suite | Test |
@@ -145,7 +173,7 @@ With **rollup-plugin-inject-process-env**, you may inject safely any JSON object
 
 
 
-#### ✅ `/test/node.test.ts` **0.182s** 
+#### ✅ `/test/node.2.test.ts` **0.251s** 
 
 
 | Status | Suite | Test |
@@ -153,6 +181,28 @@ With **rollup-plugin-inject-process-env**, you may inject safely any JSON object
 | ✅ | Node | get NODE_ENV |
 | ✅ | Node | get SOME_OBJECT |
 | ✅ | Node | get MISSING |
+
+
+
+#### ✅ `/test/node.test.ts` **0.209s** 
+
+
+| Status | Suite | Test |
+| ------ | ----- | ---- |
+| ✅ | Node | get NODE_ENV |
+| ✅ | Node | get SOME_OBJECT |
+| ✅ | Node | get MISSING |
+
+
+
+#### ✅ `/test/node.3.test.ts` **0.21s** 
+
+
+| Status | Suite | Test |
+| ------ | ----- | ---- |
+| ✅ | Filter out CSS | get NODE_ENV |
+| ✅ | Filter out CSS | get SOME_OBJECT |
+| ✅ | Filter out CSS | get MISSING |
 
 
 

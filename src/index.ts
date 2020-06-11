@@ -1,5 +1,6 @@
-import MagicString from 'magic-string';
 import { Plugin } from 'rollup';
+import MagicString from 'magic-string';
+import { createFilter } from '@rollup/pluginutils';
 
 const name = 'rollup-plugin-inject-process-env';
 
@@ -7,11 +8,29 @@ const name = 'rollup-plugin-inject-process-env';
 // We prefix it with \0 so that other plugins ignore it
 const VIRTUAL_MODULE_ID = `\0${ name }`;
 
-export default function rollupPluginInjectProcessEnv(env = {}): Plugin {
+type Options = {
+    include?: string | string[]
+    exclude?: string | string[]
+    verbose?: boolean
+}
+
+export default function rollupPluginInjectProcessEnv(env = {}, options: Options = {} ): Plugin {
+    const { include, exclude, verbose = false } = options;
+    const filter = createFilter(include, exclude);
     return {
         name,
         transform(code: string, id: string) {
-            // Each module except our virtual module gets the process mock injected.
+            if (filter(id)) {
+                if (verbose) {
+                    console.log(`[${name}] Include ${id}`);
+                }
+            } else {
+                if (verbose) {
+                    console.log(`[${name}] Exclude ${id}`);
+                }
+                return null;
+            }
+            // Each non-filtered module except our virtual module gets the process mock injected.
             if (id !== VIRTUAL_MODULE_ID) {
                 const magicString = new MagicString(code);
                 magicString.prepend(`import '${VIRTUAL_MODULE_ID}';\n`);
