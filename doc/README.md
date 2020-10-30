@@ -126,4 +126,23 @@ Output example of the `verbose` option :
 You might notice that as mentionned in the documentation https://nodejs.org/api/process.html#process_process_env
 environment variables are always `string`, `number` or `boolean`.
 
-With **rollup-plugin-inject-process-env**, you may inject safely any JSON object to a `process.env` property.
+With **rollup-plugin-inject-process-env**, you may inject safely any JSON object to a `process.env` property, as shown in the example above.
+
+## Troubleshootings
+
+### `'globalThis' is undefined`
+
+This error may occur in target environments where `globalThis` is undefined. You should use a polyfill to fix it :
+
+```
+npm install @ungap/global-this
+```
+
+And include it in your code, e.g. :
+
+```
+import '@ungap/global-this';
+```
+
+* https://github.com/ungap/global-this
+* https://mathiasbynens.be/notes/globalthis

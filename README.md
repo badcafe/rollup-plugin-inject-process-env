@@ -128,7 +128,27 @@ Output example of the `verbose` option :
 You might notice that as mentionned in the documentation https://nodejs.org/api/process.html#process_process_env
 environment variables are always `string`, `number` or `boolean`.
 
-With **rollup-plugin-inject-process-env**, you may inject safely any JSON object to a `process.env` property.
+With **rollup-plugin-inject-process-env**, you may inject safely any JSON object to a `process.env` property, as shown in the example above.
+
+## Troubleshootings
+
+### `'globalThis' is undefined`
+
+This error may occur in target environments where `globalThis` is undefined. You should use a polyfill to fix it :
+
+```
+npm install @ungap/global-this
+```
+
+And include it in your code, e.g. :
+
+```
+import '@ungap/global-this';
+```
+
+* https://github.com/ungap/global-this
+* https://mathiasbynens.be/notes/globalthis
+
 
 ## Reports
 
@@ -164,7 +184,7 @@ With **rollup-plugin-inject-process-env**, you may inject safely any JSON object
 
 
 
-#### ✅ `/test/browser.test.ts` **2.033s** 
+#### ✅ `/test/browser.test.ts` **1.609s** 
 
 
 | Status | Suite | Test |
@@ -175,7 +195,7 @@ With **rollup-plugin-inject-process-env**, you may inject safely any JSON object
 
 
 
-#### ✅ `/test/node.3.test.ts` **0.208s** 
+#### ✅ `/test/node.3.test.ts` **0.254s** 
 
 
 | Status | Suite | Test |
@@ -186,7 +206,7 @@ With **rollup-plugin-inject-process-env**, you may inject safely any JSON object
 
 
 
-#### ✅ `/test/node.2.test.ts` **0.196s** 
+#### ✅ `/test/node.test.ts` **0.216s** 
 
 
 | Status | Suite | Test |
@@ -197,7 +217,7 @@ With **rollup-plugin-inject-process-env**, you may inject safely any JSON object
 
 
 
-#### ✅ `/test/node.test.ts` **0.208s** 
+#### ✅ `/test/node.2.test.ts` **0.163s** 
 
 
 | Status | Suite | Test |
