@@ -48,9 +48,9 @@ npm install --save-dev rollup-plugin-inject-process-env
 Pass any JSON object to the plugin that will be set as the `process.env` value. This object accept members value of any type.
 
 ```typescript
-    injectProcessEnv(
-        env: {},
-        options: {
+    function injectProcessEnv(
+        env: object,
+        options?: {
             include?: string | string[],
             exclude?: string | string[],
             verbose?: boolean
@@ -69,13 +69,13 @@ import injectProcessEnv from 'rollup-plugin-inject-process-env';
 
     plugins: [
         typescript(),
+        commonjs(),
         injectProcessEnv({ 
             NODE_ENV: 'production',
             SOME_OBJECT: { one: 1, two: [1,2], three: '3' },
             UNUSED: null
         }),
-        nodeResolve(),
-        commonjs()
+        nodeResolve()
     ],
 ```
 

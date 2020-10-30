@@ -50,14 +50,14 @@ npm install --save-dev rollup-plugin-inject-process-env
 Pass any JSON object to the plugin that will be set as the `process.env` value. This object accept members value of any type.
 
 ```typescript
-    injectProcessEnv({
-        env: {},
-        options: {
+    function injectProcessEnv(
+        env: object,
+        options?: {
             include?: string | string[],
             exclude?: string | string[],
             verbose?: boolean
         }
-    })
+    )
 ```
 
 > Note: if you use the [commonjs](https://github.com/rollup/plugins/tree/master/packages/commonjs) plugin `injectProcessEnv` must be listed _after_ it in your plugins list. Otherwise you will see the error `'import' and 'export' may only appear at the top level`.
@@ -71,13 +71,13 @@ import injectProcessEnv from 'rollup-plugin-inject-process-env';
 
     plugins: [
         typescript(),
+        commonjs(),
         injectProcessEnv({ 
             NODE_ENV: 'production',
             SOME_OBJECT: { one: 1, two: [1,2], three: '3' },
             UNUSED: null
         }),
-        nodeResolve(),
-        commonjs()
+        nodeResolve()
     ],
 ```
 
@@ -184,7 +184,7 @@ import '@ungap/global-this';
 
 
 
-#### ✅ `/test/browser.test.ts` **1.609s** 
+#### ✅ `/test/browser.test.ts` **1.727s** 
 
 
 | Status | Suite | Test |
@@ -195,7 +195,7 @@ import '@ungap/global-this';
 
 
 
-#### ✅ `/test/node.3.test.ts` **0.254s** 
+#### ✅ `/test/node.3.test.ts` **0.173s** 
 
 
 | Status | Suite | Test |
@@ -206,7 +206,7 @@ import '@ungap/global-this';
 
 
 
-#### ✅ `/test/node.test.ts` **0.216s** 
+#### ✅ `/test/node.test.ts` **0.162s** 
 
 
 | Status | Suite | Test |
@@ -217,7 +217,7 @@ import '@ungap/global-this';
 
 
 
-#### ✅ `/test/node.2.test.ts` **0.163s** 
+#### ✅ `/test/node.2.test.ts` **0.161s** 
 
 
 | Status | Suite | Test |
