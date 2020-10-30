@@ -12,3 +12,6 @@ dist/
 
 # Generated data
 scripts/*-report.json
+
+# Misc
+.DS_Store
